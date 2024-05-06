@@ -89,19 +89,46 @@ button[type="submit"] {
         padding: 20px;
     }
 
-    #results img {
+    /* #results img {
         border-radius: 8px;
         margin-bottom: 20px;
         object-fit: cover;
         height: 200px;
         width: 100%;
-    }
+    } */
 
     #results h3 {
         color: #333;
         font-size: 24px;
         margin: 0;
     }
+
+
+
+    .messages-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* Align items to the start (left end) of the container */
+        justify-content: flex-end; /* Align items to the end (bottom end) of the container */
+        height: 100%; /* Ensure the container takes the full height */
+      }
+      
+      .message {
+        max-width: 70%;
+        margin-bottom: 10px;
+        padding: 8px;
+        border-radius: 8px;
+      }
+      
+      .user {
+        align-self: flex-end; /* Align user messages to the end (right end) */
+        background-color: #d1ecf1;
+      }
+      
+      .bot {
+        align-self: flex-start; /* Align bot messages to the start (left end) */
+        background-color: #dee2e6;
+      }
 
     #results ul {
         margin: 0;
@@ -177,3 +204,20 @@ button[type="submit"] {
             padding: 5px 10px;
             border-radius: 10px;
           }
+
+          .send-button {
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 50%; /* Make the button round */
+            width: 40px; /* Adjust width as needed */
+            height: 40px; /* Adjust height as needed */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          
+          /* Hover effect */
+          .send-button:hover {
+            background-color: darkgray;
+          }  
