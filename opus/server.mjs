@@ -1,6 +1,5 @@
 import express from 'express'
 import cors from 'cors'
-import pkg from 'body-parser';
 import Anthropic from "@anthropic-ai/sdk";
 import dotenv from 'dotenv';
 
@@ -11,7 +10,7 @@ const anthropic = new Anthropic({
 
 const app=express()
 
-app.use(pkg.json())
+app.use(express.json())
 
 app.use(cors({origin:process.env.FRONTEND,credentials:true,methods:['GET','PUT','POST','PATCH','DELETE','UPDATE']}))
 
