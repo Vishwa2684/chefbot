@@ -128,3 +128,35 @@ button[type="submit"] {
             background-color: #0069d9;
         }
 
+        .search {
+            position: fixed; /* Position the search bar fixed on the bottom */
+            bottom: 0; /* Align it to the bottom */
+            left: 0; /* Align it to the left */
+            width: 100%; /* Make it full width */
+            background-color: #f9f9f9; /* Background color */
+            padding: 10px; /* Add some padding */
+            box-sizing: border-box; /* Ensure padding and border are included in the width */
+            border-top: 1px solid #ccc; /* Add a border at the top */
+            z-index: 99; /* Ensure it appears above content but below navbar */
+          }
+                    
+          .search input[type="text"] {
+            width: calc(100% - 80px); /* Adjust the width of the input */
+            padding: 8px; /* Add padding to the input */
+            border: 1px solid #ccc; /* Add a border to the input */
+            border-radius: 5px; /* Add some border-radius to the input */
+          }
+          
+          .search button {
+            width: 80px; /* Set the width of the button */
+            padding: 8px; /* Add padding to the button */
+            border: none; /* Remove the border */
+            background-color: #007bff; /* Button background color */
+            color: #fff; /* Button text color */
+            border-radius: 5px; /* Add some border-radius to the button */
+            cursor: pointer; /* Change cursor to pointer on hover */
+          }
+          
+          .search button:hover {
+            background-color: #0056b3; /* Button background color on hover */
+          }
