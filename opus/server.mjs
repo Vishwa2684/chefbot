@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors'
+import pkg from 'body-parser';
 import Anthropic from "@anthropic-ai/sdk";
 import dotenv from 'dotenv';
 
@@ -10,9 +11,9 @@ const anthropic = new Anthropic({
 
 const app=express()
 
-app.use(express.json())
+app.use(pkg.json())
 
-app.use(cors({origin:process.env.FRONTEND,credentials:true,methods:['GET','PUT','POST','PATCH','DELETE','UPDATE']}))
+app.use(cors({origin:process.env.FRONTEND,credentials:true}))
 
 
 app.post('/api/anthropic',async (req,res)=>{
@@ -30,6 +31,8 @@ app.post('/api/anthropic',async (req,res)=>{
             }]
             }
         */
+
+        console.log(`request made to /api/anthropic`)
         let msgs = req.body.messages
         const msg = await anthropic.messages.create({
               model: "claude-3-opus-20240229",
@@ -44,6 +47,11 @@ app.post('/api/anthropic',async (req,res)=>{
         return res.json({"error":error.message})
     }
 })
+
+
+    app.post('/api/test',(req,res)=>{
+        return res.json({message:'This is a test'})
+    })
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 app.listen(process.env.BACKPORT,()=>{

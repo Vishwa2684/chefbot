@@ -7154,3 +7154,41 @@
         }
     ]
 }
+
+//input format of anthropic ai
+
+{
+    "messages":[{
+             "role": "user",
+             "content": [
+                 {
+                     "type": "text",
+                     "text": "Cook something for me"
+                 }
+             ]
+         }]
+ }
+
+
+//output format of anthropic json
+
+{
+    "msg": {
+        "id": "msg_01AfgS41CbgwyrYxMbSwSnT5",
+        "type": "message",
+        "role": "assistant",
+        "model": "claude-3-opus-20240229",
+        "stop_sequence": null,
+        "usage": {
+            "input_tokens": 114,
+            "output_tokens": 96
+        },
+        "content": [
+            {
+                "type": "text",
+                "text": "I apologize for the confusion, but I am an AI language model and do not have the ability to physically cook for you. However, I can certainly help you come up with recipe ideas based on the ingredients you have available and your dietary preferences. If you provide me with more information about what ingredients you have on hand and any specific dietary requirements or preferences, I'll be happy to suggest some personalized recipe ideas for you to try out in your own kitchen."
+            }
+        ],
+        "stop_reason": "end_turn"
+    }
+}

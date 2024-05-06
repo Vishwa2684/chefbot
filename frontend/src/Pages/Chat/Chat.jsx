@@ -5,44 +5,77 @@ import axios from 'axios'
 
 import  Button  from 'react-bootstrap/Button'
 
+const API_ROUTE='import.meta.env.VITE_ANTHROPIC'
 
 export default function Chat() {
     const [prompt,setPrompt] = useState(null)
-    const [results,setResults] = useState([])
+    // const [results,setResults] = useState([])
+    const [messages,setMessages]=useState([])
+    const [loading,setLoading]=useState(false)
 
-    
     const action = async ()=>{
-      const response = await axios.get(`https://api.edamam.com/search?q=${prompt}&app_id=7aa516a5&app_key=dc836a223fb788b11ae390504d9e97ce&from=0&to=10`);
+      if (!prompt) return; // Don't proceed if prompt is empty
+
+      // Add user's input message to the messages array
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { content: prompt, role: 'user' },
+      ]);
+      setLoading(true)
+      const response = await axios.post('http://localhost:3001/api/test',
+          { "messages":[{
+            "role": "user",
+            "content": [
+                        {
+                        "type": "text",
+                        "text": `${prompt}`
+                        }
+                    ]               
+        }]}
+      );
       if(response.status === 200){
         const data= await response.data
+        // const msg= data.msg.content[0].text
+        const msg = data.message /*this is for test*/
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { content: `${msg}`, role: 'bot' },
+        ]);
         console.log(`response ok`)
-        setResults(data.hits)
+        setLoading(false)
+        // setResults(data.hits)
+      }else{
+        console.log('response not ok: ',response.status)
       }
     }
+
     
     return (
       <div className="container">
-          
-          {prompt && (
-            <div className="chat-prompt">
-              {/* You: {prompt} */}
-              <strong>Typing...</strong>
-            </div>
-          )}
 
-          {results.map(recipe => (
-              <RecipeCard image={recipe.recipe.image} label ={recipe.recipe.label} url={recipe.recipe.url} ingredientLines={recipe.recipe.ingredientLines}/> 
-            ))}
+          {/* ALL I NEED NOW IS A MESSAGES CONTAINER TO DISPLAY USER AND BOT MESSAGES HERE */}
+          {messages.map((message, index) => (
+            <div className='message'>
+              <div key={index} className={message.role}>
+                {message.content}
+              </div>
+            </div>
+          ))}
+
 
             <div className='search'>
                 <input type="text" id="search" placeholder="Enter ingredients or your recipe....." onChange={(e)=>{
                     setPrompt(e.target.value)
                   }}/>
                 
-                  <Button onClick={action}>search</Button>
+                  {loading?<p>loading...</p>:<Button onClick={action}>search</Button>}
             </div>
               
       </div>
 
   )
 }
+
+
+
+
