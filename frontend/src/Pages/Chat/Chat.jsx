@@ -25,7 +25,8 @@ export default function Chat() {
           
           {prompt && (
             <div className="chat-prompt">
-              You: {prompt}
+              {/* You: {prompt} */}
+              <strong>Typing...</strong>
             </div>
           )}
 
