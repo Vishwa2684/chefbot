@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import './Chat.css';
 import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css'
 import { toast, ToastContainer } from 'react-toastify';
 import { IoSendSharp } from 'react-icons/io5';
 import 'react-toastify/dist/ReactToastify.css';
 import Button from 'react-bootstrap/Button';
 
 const API_ROUTE = 'import.meta.env.VITE_ANTHROPIC';
-
+const date =`${new Date().getHours()}:${new Date().getMinutes()}`
 export default function Chat() {
   const [prompt, setPrompt] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -60,16 +61,18 @@ export default function Chat() {
     <>
       <div className="container">
         <ToastContainer />
-        
+
+
+        <div className="messages-container">
           {messages.map((message, index) => (
             <div
               key={index}
-              className={`message ${message.role === 'user' ? 'user' : 'bot'}`}
+              className={`message ${message.role === 'user' ? 'message-user' : 'message-bot'}`}
             >
               {message.content}
             </div>
           ))}
-        
+        </div>
 
         <div className="search">
           <input
@@ -93,3 +96,5 @@ export default function Chat() {
     </>
   );
 }
+
+
