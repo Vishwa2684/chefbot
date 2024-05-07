@@ -47,16 +47,27 @@
     left: 0;
     width: 200px;
     height: 100vh;
-    background-color: #333;
     color: #fff;
-    padding: 20px;
+    /* padding: 20px; */
     margin: 0;
     box-sizing: border-box;
-    z-index: 2; /* Ensure the sidebar is above other content */
+    z-index: 2; 
 }
 
+/* .sidebar {
+  width: 200px; 
+  background-color: #f0f0f0;
+  border-right: 1px solid #ccc;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  
+} */
+
+
 .sidebar.open {
-  left: 0; /* Slide the sidebar into view */
+  left: 0; 
 }
 
 .chat-container {

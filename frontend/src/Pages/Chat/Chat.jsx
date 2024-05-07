@@ -13,6 +13,7 @@ export default function Chat() {
   const [prompt, setPrompt] = useState(null);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [clicked,isClicked] =useState(false);
 
   const action = async () => {
     if (!prompt) {
@@ -40,20 +41,25 @@ export default function Chat() {
         ],
       });
       if (response.status === 200) {
+        
         const data = response.data;
         const msg = data.message;
         setMessages((prevMessages) => [
           ...prevMessages,
           { content: `${msg}`, role: 'bot' },
         ]);
+        isClicked(true)
         setLoading(false);
       } else {
         console.log('response not ok: ', response.status);
         toast.error('INTERNAL SERVER ERROR (500)');
+        setLoading(false)
+
       }
     } catch (error) {
       console.error('Error occurred:', error);
       toast.error('Error occurred while processing your request');
+      setLoading(false)
     }
   };
 
@@ -80,14 +86,14 @@ export default function Chat() {
             id="search"
             placeholder="Enter ingredients or your recipe....."
             onChange={(e) => {
-              setPrompt(e.target.value);
+              {clicked?setPrompt(''):setPrompt(e.target.value)};
             }}
           />
 
           {loading ? (
             <p>loading...</p>
           ) : (
-            <Button className="send-button" onClick={action}>
+            <Button className="send-button" onClick={action} >
               <IoSendSharp />
             </Button>
           )}
