@@ -52,18 +52,9 @@
     margin: 0;
     box-sizing: border-box;
     z-index: 2; 
-}
-
-/* .sidebar {
-  width: 200px; 
-  background-color: #f0f0f0;
-  border-right: 1px solid #ccc;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
   
-} */
+  border-right: 1px solid #ccc;
+}
 
 
 .sidebar.open {
@@ -79,4 +70,7 @@
 .chat {
   flex: 1; /* Allow the chat content to grow to fill the remaining space */
   overflow-y: auto; /* Add a scrollbar if the content overflows vertically */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }

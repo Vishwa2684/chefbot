@@ -68,7 +68,7 @@ export default function Chat() {
       <div className="container">
         <ToastContainer />
 
-
+    {/* THIS CONTAINER RENDERS MESSAGES */}
         <div className="messages-container">
           {messages.map((message, index) => (
             <div
@@ -80,13 +80,21 @@ export default function Chat() {
           ))}
         </div>
 
+    {/* IT IS THE SEARCH BAR */}
         <div className="search">
           <input
             type="text"
             id="search"
             placeholder="Enter ingredients or your recipe....."
             onChange={(e) => {
-              {clicked?setPrompt(''):setPrompt(e.target.value)};
+              {setPrompt(e.target.value)};
+            }}
+            onKeyDown={(e)=>{
+              if(e.key === 'Enter'){
+                action()
+                e.target.value = ''
+                setPrompt('')
+              } 
             }}
           />
 
