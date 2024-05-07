@@ -90,7 +90,10 @@ export default function Chat() {
               {setPrompt(e.target.value)};
             }}
             onKeyDown={(e)=>{
-              if(e.key === 'Enter'){
+              if(e.key ==='Enter' && e.shiftKey){
+                setPrompt(prevPrompt => prevPrompt+'\n')
+              }
+              else if(e.key === 'Enter'){
                 action()
                 e.target.value = ''
                 setPrompt('')
