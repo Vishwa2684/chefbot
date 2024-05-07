@@ -9,7 +9,10 @@ function App() {
 
   const [open,setOpen] =useState(true)
 
-    const handleSidebarToggle = () => {
+
+  console.log(`in app: ${open}`)
+
+  const handleSidebarToggle = () => {
        setOpen(!open);
      };
 
@@ -20,7 +23,7 @@ function App() {
         <SideBar handleSidebarToggle={handleSidebarToggle} open={open}/>
       </div>
 
-      <div className="chat">
+      <div className={`chat${open?'-open':'-closed'}`}>
         <Chat open={open}/>
       </div>
     </div>
