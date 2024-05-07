@@ -42,16 +42,21 @@
 }
 
 .sidebar {
-  position: fixed; /* Ensure it remains fixed on the left side */
-  top: 0; /* Align it to the top */
-  left: 0; /* Align it to the left */
-  width: 200px; /* Set the width of the sidebar */
-  height: 100vh; /* Set the height to match the viewport height */
-  background-color: #333; /* Set a background color */
-  color: #fff; /* Set text color */
-  padding: 20px; /* Add padding */
-  margin: 0; /* Remove any default margins */
-  box-sizing: border-box; /* Ensure padding and border are included in the width and height */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100vh;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    margin: 0;
+    box-sizing: border-box;
+    z-index: 2; /* Ensure the sidebar is above other content */
+}
+
+.sidebar.open {
+  left: 0; /* Slide the sidebar into view */
 }
 
 .chat-container {
@@ -59,12 +64,6 @@
   height: 100vh; /* Set the chat container to take the full viewport height */
 }
 
-.sidebar {
-  flex: 0 0 auto; /* Allow the sidebar to grow or shrink, but not beyond its initial size */
-  width: 200px; /* Set the width of the sidebar */
-  background-color: #333; /* Sidebar background color */
-  color: #fff; /* Text color */
-}
 
 .chat {
   flex: 1; /* Allow the chat content to grow to fill the remaining space */

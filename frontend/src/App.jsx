@@ -9,9 +9,9 @@ function App() {
 
   return (
     <>
-    {/* <div className='sidebar'>
+    <div className='sidebar'>
       <Sidebar/>
-    </div> */}
+    </div>
     <div className="chat">
       <Chat/>
     </div>

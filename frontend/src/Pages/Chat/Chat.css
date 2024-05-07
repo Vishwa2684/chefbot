@@ -115,16 +115,26 @@ button[type="submit"]:hover {
 }
 
 .search {
-  position: fixed;
+  /* position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   padding: 10px;
   background-color: #f0f0f0;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #ccc; */
+    position: fixed; /* Fix the search bar at the bottom of the viewport */
+    bottom: 0;
+    left: 200px; /* Adjust according to the width of the sidebar */
+    width: calc(100% - 200px); /* Subtract the width of the sidebar from 100% */
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-top: 1px solid #ccc;
+    z-index: 1; /* Ensure the search bar is above the sidebar */
+  
 }
 
 .search input[type="text"] {
+  /* position: absolute; */
   width: calc(100% - 80px);
   padding: 8px;
   border: 1px solid #ccc;
@@ -134,7 +144,7 @@ button[type="submit"]:hover {
 .search button {
   width: 80px;
   padding: 8px;
-  border: none;
+  border: 20px;
   background-color: #007bff;
   color: #fff;
   border-radius: 5px;
@@ -206,8 +216,13 @@ button[type="submit"]:hover {
 }
 
 .message-bot {
-  background-color: #f8d7da;
+  /* background-color: #f8d7da;
   align-self: flex-start;
   margin-bottom: 10px;
-  margin-left: 10px;
+  margin-left: 10px; */
+    background-color: #f8d7da;
+    align-self: flex-start;
+    margin-bottom: 10px;
+    margin-left: 210px; /* Adjust according to the width of the sidebar */
+    z-index: 0; /* Ensure the bot messages are behind the sidebar */
 }
