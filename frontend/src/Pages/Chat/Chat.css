@@ -117,7 +117,7 @@ button[type="submit"]:hover {
 .search {
     position: fixed; /* Fix the search bar at the bottom of the viewport */
     bottom: 0;
-    left: 200px; /* Adjust according to the width of the sidebar */
+    left: 150px; /* Adjust according to the width of the sidebar */
     width: calc(100% - 200px); /* Subtract the width of the sidebar from 100% */
     padding: 10px;
     background-color: #FF9D62;
@@ -134,17 +134,19 @@ button[type="submit"]:hover {
 }
 
 .search button {
-  width: 80px;
-  padding: 8px;
+  width: 45px;
+  padding: initial;
   border: 20px;
-  background-color: #007bff;
+  background-color: rgb(0, 0, 0);
   color: #fff;
-  border-radius: 5px;
+  border-radius: 50%;
   cursor: pointer;
+  height: 45px;
 }
 
 .search button:hover {
-  background-color: #0056b3;
+  background-color: #7D7673;
+  color: #fff;
 }
 
 .message {
