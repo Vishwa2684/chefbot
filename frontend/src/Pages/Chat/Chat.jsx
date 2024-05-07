@@ -8,12 +8,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import Button from 'react-bootstrap/Button';
 
 const API_ROUTE = 'import.meta.env.VITE_ANTHROPIC';
-const date =`${new Date().getHours()}:${new Date().getMinutes()}`
+
+// Planned to add a timestamp also
+// const date =`${new Date().getHours()}:${new Date().getMinutes()}`
+
 export default function Chat() {
   const [prompt, setPrompt] = useState(null);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [clicked,isClicked] =useState(false);
+
 
   const action = async () => {
     if (!prompt) {
@@ -48,7 +51,6 @@ export default function Chat() {
           ...prevMessages,
           { content: `${msg}`, role: 'bot' },
         ]);
-        isClicked(true)
         setLoading(false);
       } else {
         console.log('response not ok: ', response.status);
