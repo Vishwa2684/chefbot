@@ -12,12 +12,12 @@ const API_ROUTE = 'import.meta.env.VITE_ANTHROPIC';
 // Planned to add a timestamp also
 // const date =`${new Date().getHours()}:${new Date().getMinutes()}`
 
-export default function Chat() {
+export default function Chat({open}) {
   const [prompt, setPrompt] = useState(null);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
 
-
+  console.log(`In chat : ${open}`)
   const action = async () => {
     if (!prompt) {
       toast.error('Enter a prompt');
@@ -67,7 +67,7 @@ export default function Chat() {
 
   return (
     <>
-      <div className="container">
+      <div className={`container${open?'':'-closed'}`}>
         <ToastContainer />
 
     {/* THIS CONTAINER RENDERS MESSAGES */}

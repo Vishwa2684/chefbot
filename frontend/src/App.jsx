@@ -2,17 +2,26 @@
 import './App.css'
 import Chat from './Pages/Chat/Chat'
 import SideBar from './Components/Sidebar'
+import { useState } from 'react';
+
+
 function App() {
+
+  const [open,setOpen] =useState(true)
+
+    const handleSidebarToggle = () => {
+       setOpen(!open);
+     };
 
   return (
     <>
     <div className='app-container'>
       <div className='sidebar'>
-        <SideBar/>
+        <SideBar handleSidebarToggle={handleSidebarToggle} open={open}/>
       </div>
 
       <div className="chat">
-        <Chat/>
+        <Chat open={open}/>
       </div>
     </div>
     </>
@@ -20,3 +29,35 @@ function App() {
 }
 
 export default App
+
+
+
+// import React, { useState } from 'react';
+// import Sidebar from './Components/Sidebar'
+
+// import Chat from './Pages/Chat/Chat'
+
+
+// function App() {
+//   const [open, setOpen] = useState(true);
+
+//   const handleSidebarToggle = () => {
+//     setOpen(!open);
+//   };
+
+//   return (
+//     <>
+//       <div className='app-container'>
+//         <div className='sidebar'>
+//           <Sidebar handleSidebarToggle={handleSidebarToggle} open={open} />
+//         </div>
+
+//         <div className="chat">
+//           <Chat open={open} />
+//         </div>
+//       </div>
+//     </>
+//   );
+// }
+
+// export default App;
