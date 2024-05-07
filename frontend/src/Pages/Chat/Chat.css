@@ -145,8 +145,8 @@ button[type="submit"]:hover {
 }
 
 .search button:hover {
-  background-color: #7D7673;
-  color: #fff;
+  background-color: #fff0f1;
+  color: #000;
 }
 
 .message {
