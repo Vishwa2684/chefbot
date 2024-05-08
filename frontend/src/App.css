@@ -65,10 +65,12 @@
 }
 
 
-.chat {
-  flex: 1; /* Allow the chat content to grow to fill the remaining space */
-  overflow-y: auto; /* Add a scrollbar if the content overflows vertically */
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+.chat-open {
+  margin-left: 200px; /* Adjust this value according to your sidebar width */
+  transition: margin-left 0.3s ease; /* Add transition for smooth animation */
+}
+
+.chat-closed {
+  margin-left: 20px; /* Adjust this value according to your sidebar width */
+  transition: margin-left 0.3s ease; /* Add transition for smooth animation */
 }

@@ -1,6 +1,6 @@
 
 import './App.css'
-import Chat from './Pages/Chat/Chat'
+import Chat from './Components/Chatbox/Chatbox.jsx'
 import SideBar from './Components/Sidebar'
 import { useState } from 'react';
 
