@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './Chatbox.css';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { toast, ToastContainer } from 'react-toastify';
 import { IoSendSharp } from 'react-icons/io5';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,13 +9,11 @@ import Button from 'react-bootstrap/Button';
 
 const API_ROUTE = 'import.meta.env.VITE_ANTHROPIC';
 
-// Planned to add a timestamp also
-// const date =`${new Date().getHours()}:${new Date().getMinutes()}`
-
 export default function Chatbox() {
   const [prompt, setPrompt] = useState(null);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
+  const inputRef = useRef(null); // Create a ref
 
   const action = async () => {
     if (!prompt) {
@@ -43,7 +41,6 @@ export default function Chatbox() {
         ],
       });
       if (response.status === 200) {
-        
         const data = response.data;
         const msg = data.message;
         setMessages((prevMessages) => [
@@ -54,22 +51,23 @@ export default function Chatbox() {
       } else {
         console.log('response not ok: ', response.status);
         toast.error('INTERNAL SERVER ERROR (500)');
-        setLoading(false)
-
+        setLoading(false);
       }
     } catch (error) {
       console.error('Error occurred:', error);
       toast.error('Error occurred while processing your request');
-      setLoading(false)
+      setLoading(false);
     }
+    
+    // Clear input value
+    setPrompt('');
+    inputRef.current.value = '';
   };
 
   return (
     <>
       <div className={`container`}>
         <ToastContainer />
-
-    {/* THIS CONTAINER RENDERS MESSAGES */}
         <div className="messages-container">
           {messages.map((message, index) => (
             <div
@@ -80,32 +78,27 @@ export default function Chatbox() {
             </div>
           ))}
         </div>
-
-    {/* IT IS THE SEARCH BAR */}
         <div className="search">
           <input
+            ref={inputRef} // Assign ref to input element
             type="text"
             id="search"
             placeholder="Enter ingredients or your recipe....."
             onChange={(e) => {
-              {setPrompt(e.target.value)};
+              setPrompt(e.target.value);
             }}
-            onKeyDown={(e)=>{
-              if(e.key ==='Enter' && e.shiftKey){
-                setPrompt(prevPrompt => prevPrompt+'\n')
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && e.shiftKey) {
+                setPrompt((prevPrompt) => prevPrompt + '\n');
+              } else if (e.key === 'Enter') {
+                action();
               }
-              else if(e.key === 'Enter'){
-                action()
-                e.target.value = ''
-                setPrompt('')
-              } 
             }}
           />
-
           {loading ? (
             <p>loading...</p>
           ) : (
-            <Button className="send-button" onClick={action}  >
+            <Button className="send-button" onClick={action}>
               <IoSendSharp />
             </Button>
           )}
@@ -114,5 +107,3 @@ export default function Chatbox() {
     </>
   );
 }
-
-
