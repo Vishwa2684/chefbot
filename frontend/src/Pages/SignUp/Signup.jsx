@@ -1,5 +1,7 @@
 import React, { useState,useRef } from 'react';
 
+import {useNavigate} from 'react-router-dom'
+
 import { createUserWithEmailAndPassword ,
     GoogleAuthProvider,signInWithPopup} from 'firebase/auth';
 import {auth} from '../../config/config.js'
@@ -12,7 +14,7 @@ export default function Signup() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-
+    const navigate = useNavigate()
 
     const handleEmailChange = (e) => setEmail(e.target.value);
     const handlePasswordChange = (e) => setPassword(e.target.value);
@@ -25,6 +27,7 @@ export default function Signup() {
             const user = userCredential.user;
             console.log('Signed up successfully:', user);
             toast('Signed up successfully')
+            navigate('/c')
         } catch (error) {
             console.error('Error signing up:', error);
             toast.error('Fill the details')
@@ -38,6 +41,8 @@ export default function Signup() {
             // Signed up with Google successfully
             const user = userCredential.user;
             console.log('Signed up with Google successfully:', user);
+            toast('Signed up successfully')
+            navigate('/c')
         } catch (error) {
             console.error('Error signing up with Google:', error);
         }
@@ -60,13 +65,15 @@ export default function Signup() {
             transition: Bounce
             />
             
-            <h2>Log In</h2>
+            
             <form onSubmit={handleSignup} className='form-group'>
+                <h2>Log In</h2>
                 <input type="email" placeholder="Email" value={email} onChange={handleEmailChange} className='email' id='email'/>
                 <input type="password" placeholder="Password" value={password} onChange={handlePasswordChange} className='password' id='password'/>
                 <button className='btn-group' type="submit">Signup with Email/Password</button>
+                <button className='google-btn' onClick={handleGoogleSignup}>Signup with Google</button>
+
             </form>
-            <button className='google-btn' onClick={handleGoogleSignup}>Signup with Google</button>
         </div>
     );
 }
