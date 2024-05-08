@@ -67,7 +67,7 @@ export default function Signup() {
             
             
             <form onSubmit={handleSignup} className='form-group'>
-                <h2>Log In</h2>
+                <h2>Sign Up</h2>
                 <input type="email" placeholder="Email" value={email} onChange={handleEmailChange} className='email' id='email'/>
                 <input type="password" placeholder="Password" value={password} onChange={handlePasswordChange} className='password' id='password'/>
                 <button className='btn-group' type="submit">Signup with Email/Password</button>
