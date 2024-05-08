@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { getAuth,
-     createUserWithEmailAndPassword,
-      GoogleAuthProvider, 
-      signInWithPopup } from "firebase/auth";
+// import { getAuth,
+//      createUserWithEmailAndPassword,
+//       GoogleAuthProvider, 
+//       signInWithPopup } from "firebase/auth";
 import './Signup.css'
 
 
