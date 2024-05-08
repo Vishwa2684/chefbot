@@ -68,7 +68,19 @@ export default function Chatbox() {
   return (
     <>
       <div className={`container`}>
-        <ToastContainer />
+      <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+            transition: Bounce
+            />
         <div className="messages-container">
           {messages.map((message, index) => (
             <div

@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState,useRef } from 'react';
 
 import { createUserWithEmailAndPassword ,
     GoogleAuthProvider,signInWithPopup} from 'firebase/auth';
 import {auth} from '../../config/config.js'
 
 import './Signup.css'
-
+import { toast,ToastContainer } from 'react-toastify';
 
 
 export default function Signup() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+
 
     const handleEmailChange = (e) => setEmail(e.target.value);
     const handlePasswordChange = (e) => setPassword(e.target.value);
@@ -22,8 +24,10 @@ export default function Signup() {
             // Signed up successfully
             const user = userCredential.user;
             console.log('Signed up successfully:', user);
+            toast('Signed up successfully')
         } catch (error) {
             console.error('Error signing up:', error);
+            toast.error('Fill the details')
         }
     };
 
@@ -41,6 +45,21 @@ export default function Signup() {
 
     return (
         <div className='container'>
+
+            <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+            transition: Bounce
+            />
+            
             <h2>Log In</h2>
             <form onSubmit={handleSignup} className='form-group'>
                 <input type="email" placeholder="Email" value={email} onChange={handleEmailChange} className='email' id='email'/>
