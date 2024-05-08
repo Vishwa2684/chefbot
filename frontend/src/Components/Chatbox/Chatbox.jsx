@@ -48,6 +48,8 @@ export default function Chatbox() {
           { content: `${msg}`, role: 'bot' },
         ]);
         setLoading(false);
+        setPrompt('');
+        inputRef.current.value = '';
       } else {
         console.log('response not ok: ', response.status);
         toast.error('INTERNAL SERVER ERROR (500)');
@@ -60,8 +62,7 @@ export default function Chatbox() {
     }
     
     // Clear input value
-    setPrompt('');
-    inputRef.current.value = '';
+    
   };
 
   return (
