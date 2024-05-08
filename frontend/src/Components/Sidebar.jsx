@@ -29,7 +29,7 @@ const Sidebar = ({ handleSidebarToggle }) => {
               padding: '20px 5px',
             }}
           >
-            Sidebar Footer
+            {`username should come here,when i click on it,it should show me log out option`}
           </div>
         </CDBSidebarFooter>
       </CDBSidebar>
