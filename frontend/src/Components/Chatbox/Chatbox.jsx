@@ -6,7 +6,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import { IoSendSharp } from 'react-icons/io5';
 import 'react-toastify/dist/ReactToastify.css';
 import Button from 'react-bootstrap/Button';
-import loadingSVG from '../../../public/loading.svg'
+import loadingSVG from '/loading.svg'
 
 import { auth } from '../../config/config';
 import {onAuthStateChanged} from 'firebase/auth'
