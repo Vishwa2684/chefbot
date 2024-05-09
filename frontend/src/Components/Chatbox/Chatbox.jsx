@@ -7,6 +7,10 @@ import { IoSendSharp } from 'react-icons/io5';
 import 'react-toastify/dist/ReactToastify.css';
 import Button from 'react-bootstrap/Button';
 
+
+import { auth } from '../../config/config';
+import {onAuthStateChanged} from 'firebase/auth'
+
 const API_ROUTE = 'import.meta.env.VITE_ANTHROPIC';
 
 export default function Chatbox() {
@@ -92,22 +96,24 @@ export default function Chatbox() {
           ))}
         </div>
         <div className="search">
-          <input
-            ref={inputRef} // Assign ref to input element
-            type="text"
-            id="search"
-            placeholder="Enter ingredients or your recipe....."
-            onChange={(e) => {
-              setPrompt(e.target.value);
-            }}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && e.shiftKey) {
-                setPrompt((prevPrompt) => prevPrompt + '\n');
-              } else if (e.key === 'Enter') {
-                action();
-              }
-            }}
-          />
+          <div className="textarea-container">
+            <textarea
+              ref={inputRef}
+              className="textarea"
+              id="search"
+              placeholder="Enter ingredients or your recipe..."
+              value={prompt}
+              onChange={(e) => setPrompt(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && e.shiftKey) {
+                  setPrompt((prevPrompt) => prevPrompt + '');
+                } else if (e.key === 'Enter') {
+                  e.preventDefault(); // Prevent the default form submission behavior
+                  action();
+                }
+              }}
+            />
+          </div>
           {loading ? (
             <p>loading...</p>
           ) : (

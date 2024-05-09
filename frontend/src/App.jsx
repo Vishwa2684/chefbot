@@ -2,7 +2,7 @@ import './App.css'
 import Chatbox from './Components/Chatbox/Chatbox.jsx'
 import SideBar from './Components/Sidebar'
 import { useState } from 'react';
-
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
 
