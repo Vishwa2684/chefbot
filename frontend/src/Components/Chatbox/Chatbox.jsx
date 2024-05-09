@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './Chatbox.css';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -18,6 +18,19 @@ export default function Chatbox() {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef(null); // Create a ref
+  const [user,setUser] =useState(null)
+
+  
+  useEffect(async ()=>{
+    onAuthStateChanged(auth,(user)=>{
+      if(user){
+        setUser(user)
+      }else{
+        setUser(null)
+      }
+    })
+  },[])
+
 
   const action = async () => {
     if (!prompt) {
