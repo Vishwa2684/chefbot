@@ -24,6 +24,10 @@ const Sidebar = ({ handleSidebarToggle }) => {
         setUser(null);
       }
     });
+    return () =>{
+      unsubscribeFromEvents()
+      cancelNetworkRequests()
+    }
   }, []);
 
   const handleLogout = async () => {
