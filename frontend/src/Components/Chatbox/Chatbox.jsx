@@ -14,7 +14,7 @@ import {onAuthStateChanged} from 'firebase/auth'
 const API_ROUTE = 'import.meta.env.VITE_ANTHROPIC';
 
 export default function Chatbox() {
-  const [prompt, setPrompt] = useState(null);
+  const [prompt, setPrompt] = useState('');
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef(null); // Create a ref
