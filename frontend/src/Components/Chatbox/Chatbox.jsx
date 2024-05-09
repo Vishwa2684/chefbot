@@ -8,8 +8,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import Button from 'react-bootstrap/Button';
 import loadingSVG from '/loading.svg'
 
-import { auth } from '../../config/config';
+import { auth ,db} from '../../config/config';
 import {onAuthStateChanged} from 'firebase/auth'
+import {getDoc,setDoc,addDoc,doc} from 'firebase/firestore'
 
 const API_ROUTE = 'import.meta.env.VITE_ANTHROPIC';
 
