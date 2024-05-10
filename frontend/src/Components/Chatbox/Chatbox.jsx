@@ -10,7 +10,7 @@ import loadingSVG from '/loading.svg'
 
 import { auth ,db} from '../../config/config';
 import {onAuthStateChanged} from 'firebase/auth'
-import {getDoc,setDoc,addDoc,doc} from 'firebase/firestore'
+import {getDoc,setDoc,addDoc,doc,serverTimestamp} from 'firebase/firestore'
 
 const API_ROUTE = 'import.meta.env.VITE_ANTHROPIC';
 
