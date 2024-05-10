@@ -10,9 +10,15 @@ import loadingSVG from '/loading.svg'
 
 import { auth ,db} from '../../config/config';
 import {onAuthStateChanged} from 'firebase/auth'
-import {getDoc,setDoc,addDoc,doc,serverTimestamp} from 'firebase/firestore'
+import {getDoc,setDoc,
+        addDoc,doc,
+        serverTimestamp,collection,
+        onSnapshot,query,
+        orderBy} from 'firebase/firestore'
 
 const API_ROUTE = 'import.meta.env.VITE_ANTHROPIC';
+const messagesCollection = collection(db, 'messages');
+const messagesQuery = query(messagesCollection, orderBy('createdAt', 'asc'));
 
 export default function Chatbox() {
   const [prompt, setPrompt] = useState('');
@@ -21,17 +27,56 @@ export default function Chatbox() {
   const inputRef = useRef(null); // Create a ref
   const [user,setUser] =useState(null)
 
-  
-  useEffect(async ()=>{
-    onAuthStateChanged(auth,(user)=>{
-      if(user){
-        setUser(user)
-      }else{
-        setUser(null)
-      }
-    })
-  },[])
 
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       setUser(user);
+  //     } else {
+  //       setUser(null);
+  //     }
+  //   });
+
+  //   // Listen for real-time updates to the messages collection
+  //   const unsubscribeMessages = onSnapshot(messagesQuery, (querySnapshot) => {
+  //     const fetchedMessages = [];
+  //     querySnapshot.forEach((doc) => {
+  //       fetchedMessages.push({ id: doc.id, ...doc.data() });
+  //     });
+  //     // console.log(querySnapshot)
+  //     setMessages(fetchedMessages);
+  //   });
+
+  //   return () => {
+  //     unsubscribe();
+  //     unsubscribeMessages();
+  //   };
+  // }, []);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+  
+        // Set up the listener for messages here
+        const unsubscribeMessages = onSnapshot(messagesQuery, (querySnapshot) => {
+          const fetchedMessages = [];
+          querySnapshot.forEach((doc) => {
+            fetchedMessages.push({ id: doc.id, ...doc.data() });
+          });
+          setMessages(fetchedMessages);
+        });
+  
+        // Clean up the messages listener when the component unmounts
+        return unsubscribeMessages;
+      } else {
+        setUser(null);
+      }
+    });
+  
+    // Clean up the auth listener when the component unmounts
+    return unsubscribe;
+  }, []);
 
   const action = async () => {
     if (!prompt) {
@@ -65,6 +110,22 @@ export default function Chatbox() {
           ...prevMessages,
           { content: `${msg}`, role: 'bot' },
         ]);
+
+        await addDoc(messagesCollection, {
+          content: prompt,
+          role: 'user',
+          userId: user.uid, 
+          createdAt: serverTimestamp(),
+        });
+    
+        // Store the bot's response in Firestore
+        await addDoc(messagesCollection, {
+          content: msg,
+          role: 'bot',
+          userId: user.uid, 
+          createdAt: serverTimestamp(),
+        });
+
         setLoading(false);
         setPrompt('');
         inputRef.current.value = '';
