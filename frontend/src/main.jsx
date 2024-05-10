@@ -7,6 +7,7 @@ import Home from './Pages/Home.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Signup from './Pages/SignUp/Signup.jsx'
 import NotFound from './Pages/NotFound.jsx'
+import Login from './Pages/LogIn/Login.jsx';
 
 
 
@@ -16,6 +17,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       
       <Route path='/' element = {<Home/>}></Route>
       <Route path='/signup' element ={<Signup/>}></Route>
+      <Route path='/login' element ={<Login/>}></Route>
+
       <Route path='/c' element={<App />}/>
       <Route path='*' element ={<NotFound/>}></Route>
     </Routes>
