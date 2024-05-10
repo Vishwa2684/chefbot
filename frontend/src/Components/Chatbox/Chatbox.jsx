@@ -25,6 +25,7 @@ export default function Chatbox() {
   const inputRef = useRef(null); // Create a ref
   const [user,setUser] =useState(null)
 
+  console.log('In chatbox:',user?.uid)
 
   // useEffect(() => {
   //   const unsubscribe = onAuthStateChanged(auth, (user) => {
