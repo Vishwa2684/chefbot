@@ -12,55 +12,29 @@ import { auth ,db} from '../../config/config';
 import {onAuthStateChanged} from 'firebase/auth'
 import {addDoc,serverTimestamp,
         collection,onSnapshot,
-        query,orderBy} from 'firebase/firestore'
+        query,orderBy,
+        where} from 'firebase/firestore'
 
 const API_ROUTE = 'import.meta.env.VITE_ANTHROPIC';
 const messagesCollection = collection(db, 'messages');
-const messagesQuery = query(messagesCollection, orderBy('createdAt', 'asc'));
 
 export default function Chatbox() {
   const [prompt, setPrompt] = useState('');
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const inputRef = useRef(null); // Create a ref
+  const inputRef = useRef(null)
   const [user,setUser] =useState(null)
-
-  console.log('In chatbox:',user?.uid)
-
-  // useEffect(() => {
-  //   const unsubscribe = onAuthStateChanged(auth, (user) => {
-  //     if (user) {
-  //       setUser(user);
-  //     } else {
-  //       setUser(null);
-  //     }
-  //   });
-
-  //   // Listen for real-time updates to the messages collection
-  //   const unsubscribeMessages = onSnapshot(messagesQuery, (querySnapshot) => {
-  //     const fetchedMessages = [];
-  //     querySnapshot.forEach((doc) => {
-  //       fetchedMessages.push({ id: doc.id, ...doc.data() });
-  //     });
-  //     // console.log(querySnapshot)
-  //     setMessages(fetchedMessages);
-  //   });
-
-  //   return () => {
-  //     unsubscribe();
-  //     unsubscribeMessages();
-  //   };
-  // }, []);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
-  
+        const messagesQuery = query(messagesCollection, orderBy('createdAt', 'asc'),where('userId','==',user.uid));
         // Set up the listener for messages here
         const unsubscribeMessages = onSnapshot(messagesQuery, (querySnapshot) => {
           const fetchedMessages = [];
           querySnapshot.forEach((doc) => {
+            console.log(doc.data())
             fetchedMessages.push({ id: doc.id, ...doc.data() });
           });
           setMessages(fetchedMessages);
