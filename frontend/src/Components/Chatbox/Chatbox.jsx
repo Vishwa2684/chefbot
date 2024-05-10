@@ -10,11 +10,9 @@ import loadingSVG from '/loading.svg'
 
 import { auth ,db} from '../../config/config';
 import {onAuthStateChanged} from 'firebase/auth'
-import {getDoc,setDoc,
-        addDoc,doc,
-        serverTimestamp,collection,
-        onSnapshot,query,
-        orderBy} from 'firebase/firestore'
+import {addDoc,serverTimestamp,
+        collection,onSnapshot,
+        query,orderBy} from 'firebase/firestore'
 
 const API_ROUTE = 'import.meta.env.VITE_ANTHROPIC';
 const messagesCollection = collection(db, 'messages');
