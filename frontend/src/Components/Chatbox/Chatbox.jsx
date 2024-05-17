@@ -34,7 +34,6 @@ export default function Chatbox() {
         const unsubscribeMessages = onSnapshot(messagesQuery, (querySnapshot) => {
           const fetchedMessages = [];
           querySnapshot.forEach((doc) => {
-            console.log(doc.data())
             fetchedMessages.push({ id: doc.id, ...doc.data() });
           });
           setMessages(fetchedMessages);
