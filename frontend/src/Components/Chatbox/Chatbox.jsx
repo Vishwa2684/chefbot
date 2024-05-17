@@ -148,7 +148,7 @@ export default function Chatbox() {
               ref={inputRef}
               className="textarea"
               id="search"
-              placeholder="Enter ingredients or your recipe..."
+              placeholder="Ask anything regarding dishes..."
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               onKeyDown={(e) => {
