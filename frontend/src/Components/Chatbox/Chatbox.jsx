@@ -15,7 +15,6 @@ import {addDoc,serverTimestamp,
         query,orderBy,
         where} from 'firebase/firestore'
 
-const API_ROUTE = import.meta.env.VITE_ANTHROPIC;
 const messagesCollection = collection(db, 'messages');
 
 export default function Chatbox() {
@@ -62,7 +61,7 @@ export default function Chatbox() {
     ]);
     setLoading(true);
     try {
-      const response = await axios.post(API_ROUTE, {
+      const response = await axios.post(`http://localhost:3001/api/test`, {
         messages: [
           {
             role: 'user',
@@ -78,7 +77,8 @@ export default function Chatbox() {
       if (response.status === 200) {
         const data = response.data;
         console.log(data)
-        const msg = data.msg.content[0].text;
+        // const msg = data.msg.content[0].text;
+        const msg = data.content
         setMessages((prevMessages) => [
           ...prevMessages,
           { content: `${msg}`, role: 'bot' },

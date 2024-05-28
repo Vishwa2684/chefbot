@@ -9,12 +9,12 @@ import {getFirestore} from 'firebase/firestore'
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyANf4LfroYY_Wr7vILCd4nZJ2BO9uQr_-U",
-  authDomain: "recipe-generator-14da1.firebaseapp.com",
-  projectId: "recipe-generator-14da1",
-  storageBucket: "recipe-generator-14da1.appspot.com",
-  messagingSenderId: "699633352633",
-  appId: "1:699633352633:web:2c938e4ed6acb120ec4068"
+  apiKey: import.meta.env.VITE_FB_API_KEY,
+  authDomain: import.meta.env.VITE_FB_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FB_PID,
+  storageBucket: import.meta.env.VITE_FS_PB,
+  messagingSenderId: import.meta.env.VITE_FS_MSID,
+  appId: import.meta.env.VITE_FB_AID
 };
 
 // Initialize Firebase

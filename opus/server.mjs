@@ -49,9 +49,10 @@ app.post('/api/anthropic',async (req,res)=>{
 })
 
 
-    app.post('/api/test',(req,res)=>{
-        return res.json({message:'This is a test'})
-    })
+app.post('/api/test',(req,res)=>{
+    console.log(`request made to test route`)
+    return res.json({content: 'this is a test', role: 'bot'})
+})
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // 
 app.listen(process.env.BACKPORT,()=>{
