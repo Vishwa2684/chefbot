@@ -17,7 +17,7 @@ import {addDoc,serverTimestamp,
 
 const messagesCollection = collection(db, 'messages');
 
-export default function Chatbox() {
+export default function Chatbox({open}) {
   const [prompt, setPrompt] = useState('');
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -77,7 +77,10 @@ export default function Chatbox() {
       if (response.status === 200) {
         const data = response.data;
         console.log(data)
+        // for anthropic api
         // const msg = data.msg.content[0].text;
+
+        //this one's for test route in model.mjs
         const msg = data.content
         setMessages((prevMessages) => [
           ...prevMessages,
